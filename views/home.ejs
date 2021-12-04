@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/CSS/CSSfile1.css">
+    <title>
+        <%=title%>
+    </title>
+</head>
+
+<body>
+    <!-- Todo List Side Image  -->
+    <div id="To-Do-List-SideImage">
+        <img src="/Images-for-To-doList/to-do-list-apps.png" alt="To-do List App Image" id="To-Do-List-SideImage">
+    </div>
+    <form action="/" method="post">
+    <!-- Todo List Box -->
+    <div id="TO-Do-List-Box">
+        <!-- Heading -->
+        <h1 class="heading">To-Do List App </h1>
+        <!-- Description portion -->
+        <div>
+            <h5>Description</h5>
+            <input class="description" name="Name" type="text" placeholder="Enter Description Of Your Task Here" required>
+        </div>
+        <!-- Catagory and date section -->
+        <div class="Catagory-and-Date">
+            <!-- Date div -->
+            <div>
+                <h5 style="font-family: cursive;">Due Date</h5>
+                <input class="duedate" type="date" required>
+            </div>
+              <!--catagory div  -->
+            <div> 
+                <h5 style="margin-top:30px;">Catagory</h5>
+                <div class="catagory">                 
+                <label>Choose a Catagory:</label>
+                <select >
+                        <option value="none">None</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="schooling">Schooling</option>
+                        <option value="others">Others</option>
+                </select>
+                </div>
+                   </div>
+          
+        </div>
+        <div id="button-container">
+            <button style="background-color: #5d5c61;"> <i class="fas fa-plus"></i>&nbsp ADD</button>
+            <button style="background-color: #fc4445;"> <i class="fas fa-trash"></i> &nbsp Delete</button>
+        </div>
+
+    </div>
+    <div>
+        <form action="/create_task" method="post">
+            <% for(let i of listItems){ %>
+                <div id="whole">
+                    <input type="checkbox" value=<%= i._id %> >
+                    <label id="tasks" style="color: grey;" > <%= i.Description%></label>
+                        <% if(i.Category=="Work"){ %>
+                            <div id="cat" style="background-color: red;">
+                                <label style="color: white;"> <%= i.Category%></label><br>
+                            </div>
+                        <%}%>
+                        <% if(i.Category=="Personal"){ %>
+                            <div id="cat" style="background-color: purple;">
+                                <label style="color: white;" > <%= i.Category%></label><br>
+                            </div>
+                        <%}%>
+                        <% if(i.Category=="Schooling"){ %>
+                            <div id="cat" style="background-color: blue;">
+                                <label style="color: white;" > <%= i.Category%></label><br>
+                            </div>
+                        <%}%>
+                        <% if(i.Category=="Other"){ %>
+                            <div id="cat" style="background-color: yellow;">
+                                <label style="color: white;" > <%= i.Category%></label><br>
+                            </div>
+                        <%}%>
+                        <% if(i.Category=="None"){ %>
+                            <div id="cat" style="background-color: #5d5c61">
+                                <label style="color: white;" > <%= i.Category%></label><br>
+                            </div>
+                        <%}%>
+                        <br>
+                        <i id="left" style="color: grey;" class="fas fa-calendar-alt"></i> <label id="date" for="vehicle1"> <%= i.Date%></label><br>
+                        <br>
+                        <br>
+                    </div>
+                <%}%>
+
+                </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

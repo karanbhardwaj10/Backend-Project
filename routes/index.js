@@ -17,6 +17,11 @@ router.use('/users',require('./users'));
 // for any furthur routes,access from here - routes.use('/routername',require('./routerfile')) for ex
 router.use('/posts',require('./posts'));
 
+// if localhost/user/post karna ho toh "router.use('/users/posts',require('./posts'));" 
+// aur users.js file me jaake
+//  const postsController=require('../controllers/posts_controller');
+// router.get('/',postsController.posts);
+
 
 // exporting this index.js router file to our main index.js file
 module.exports=router;

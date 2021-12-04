@@ -3,6 +3,6 @@ const express = require('express')
 const router = express.Router()
 console.log('posts route file running')
 const postsController=require('../controllers/posts_controller');
-router.get('/posts',postsController.posts);
+router.get('/',postsController.posts);
 
 module.exports=router;
