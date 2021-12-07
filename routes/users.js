@@ -1,13 +1,15 @@
-const express = require('express')
-// calling the router function
-const router = express.Router()
-// checking if router is loaded
-console.log(" user router loaded");
+const express = require('express');
+const router = express.Router();
 
-//linking the userController to its user router file
-const userController=require('../controllers/users_controller')
-router.get('/profile',userController.profile);
+const usersController = require('../controllers/users_controller');
+
+router.get('/profile', usersController.profile);
+
+router.get('/sign-up', usersController.signUp);
+router.get('/sign-in', usersController.signIn);
 
 
+router.post('/create', usersController.create);
 
-module.exports=router;
+
+module.exports = router;

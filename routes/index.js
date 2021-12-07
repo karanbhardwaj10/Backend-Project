@@ -1,27 +1,16 @@
-const express = require('express')
-// calling the router function
-const router = express.Router()
-// checking if router is loaded
-console.log("router loaded");
+const express = require('express');
 
-// linking our controller file to our router index.js file
-const homeController=require('../controllers/home_controller')
+const router = express.Router();
+const homeController = require('../controllers/home_controller');
+
+console.log('router loaded');
 
 
+router.get('/', homeController.home);
+router.use('/users', require('./users'));
 
-// using function to use the controller to our server and this will handle all the request for home page
-router.get('/',homeController.home)
-// this will handle all the requests for user page
-router.use('/users',require('./users'));
-
-// for any furthur routes,access from here - routes.use('/routername',require('./routerfile')) for ex
-router.use('/posts',require('./posts'));
-
-// if localhost/user/post karna ho toh "router.use('/users/posts',require('./posts'));" 
-// aur users.js file me jaake
-//  const postsController=require('../controllers/posts_controller');
-// router.get('/',postsController.posts);
+// for any further routes, access from here
+// router.use('/routerName', require('./routerfile));
 
 
-// exporting this index.js router file to our main index.js file
-module.exports=router;
+module.exports = router;

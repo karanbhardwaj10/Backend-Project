@@ -1,66 +1,34 @@
-// including express
-const express=require('express');
-const todoList = require('./models/todolist');
-// variable to use express
-const app=express();
-// portnumber
-const port=7000;
-// use express router
-app.use('/',require('./routes'));
-// linking our static files
-app.use(express.static('./Static-Files'));
-// Middleware
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const app = express();
+const port = 7000;
+const expressLayouts = require('express-ejs-layouts');
+const db = require('./config/mongoose');
+
 app.use(express.urlencoded());
 
-// setting up the view engine
-app.set('view engine','ejs');
-app.set('views','./views')
+app.use(cookieParser());
+
+app.use(express.static('./assets'));
+
+app.use(expressLayouts);
+// extract style and scripts from sub pages into the layout
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 
-app.get('/', function (req, res) {
-    todoList.find({}, function (err,TDList) {     
-        // the second argument of the function is database name
-        if (err) {
-            console.log("error in finding the data from db");
-            return;
-        }
-        return res.render('home', {
-            title: "ToDO-List",
-            // #todo-list is the database name 
-            listItems:todo-List,
-        });
+// use express router
+app.use('/', require('./routes'));
 
-    });
-});
+// set up the view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 
-
-
-app.post('/create_task', function (req, res) {
-    
-    todoList.create({
-        Description: req.body.Description,
-        Catagory:req.body.Catagory,
-        Date: req.body.Date,
-    }, function (err, newtask) {
-        if (err) {
-            console.log('error in creating a new task')
-            return;
-        }
-        console.log('*******', newtask);
-        return res.redirect('back');
-    });
-
-});
-
-
-
-
-
-// firing up the server
-app.listen(port,function(err){
-    if(err){
-        console.log(`Error in running the server :${err}`)
+app.listen(port, function(err){
+    if (err){
+        console.log(`Error in running the server: ${err}`);
     }
-    console.log(`Server is running on portnumber :${port}`)
-})
+
+    console.log(`Server is running on port: ${port}`);
+});

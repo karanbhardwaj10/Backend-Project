@@ -1,13 +1,15 @@
-// require the library
-const mongoose=require('mongoose');
-// connect to the database
-mongoose.connect('mongodb://localhost/todo-List_db');
-// aquire the connection to check if it is successfull
-const db=mongoose.connection;
-//error
-db.on('error',console.error.bind(console,'error connecting to db'));
+const mongoose = require('mongoose');
 
-//if it's running successfully 
-db.once('open',function(){
-    console.log('Successfully connected to database');
+mongoose.connect('mongodb://localhost/codeial_development');
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, "Error connecting to MongoDB"));
+
+
+db.once('open', function(){
+    console.log('Connected to Database :: MongoDB');
 });
+
+
+module.exports = db;
