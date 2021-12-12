@@ -1,6 +1,12 @@
-module.exports.posts=function(req,res){
-    // return res.render('<h1>This is the page for posts</h1>');
-    return res.render('home',{
-        title:"Hello",
-    })
+const Post = require('../models/post')
+
+module.exports.create = function(req, res){
+    Post.create({
+        content: req.body.content,
+        user: req.user._id
+    }, function(err, post){
+        if(err){console.log('error in creating a post'); return;}
+
+        return res.redirect('back');
+    });
 }
